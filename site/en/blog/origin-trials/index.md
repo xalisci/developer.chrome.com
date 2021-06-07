@@ -12,7 +12,7 @@ tags:
   - origin-trials
 ---
 
-Origin trials give you access to a new or experimental feature, to build
+Origin trials give you access to a new or experimental feature to build
 functionality your users can try out for a limited time before the feature
 is made available to everyone.
 
@@ -26,15 +26,16 @@ understand how new features are used, and how they may interact with other web t
 Origin trials are public and open to all developers. They are limited in duration and
 usage. Participation is a self-managed process with limited documentation and support.
 Participants should be willing and able to work relatively independently using the
-documentation available, which, at this stage, will likely be limited to API
+available documentation, which, at this stage, will likely be limited to API
 specifications and explainers, though web.dev tries to provide guidance whenever
 possible.
 
-If you register for a trial, the Chrome team will periodically ask you for specific
-feedback on your use of the trial feature. Some features may undergo multiple origin
-trials, as learnings are incorporated and adjustments are made.
+If you register for an origin trial, the Chrome team will periodically ask you for specific
+feedback on your use of the feature. Some features may undergo multiple origin
+trials, as learning is incorporated and adjustments are made.
 
 {% Aside %}
+
 **Third-party origin trials**
 
 Origin trials are usually only available on a first-party basis: they only work for a single
@@ -55,7 +56,7 @@ Find out more: [What are third-party origin trials?](/blog/third-party-origin-tr
       `<meta http-equiv="origin-trial" content="TOKEN_GOES_HERE">`
    -  As an HTTP header:
       `Origin-Trial: TOKEN_GOES_HERE`
-1. Try out the new feature.
+1. Try the new feature.
 1. Submit feedback. Do this through the origin trial site. This feedback is
    not public and is available only to a limited group of people on the Chrome
    team. Each trial also provides a link for spontaneous community feedback.
@@ -71,7 +72,7 @@ be available. This is by design. If Chrome were to avoid the mandatory total-bre
 bias toward also avoiding breakages in the API surface, which are often needed to improve the API.
 The final shipping API might be worse for it.
 
-In rare circumstances, if there was clear evidence that developers engaged with the origin trial and that their
+In rare circumstances, if there is clear evidence that developers engaged with the origin trial and that their
 concerns were taken into account in the final API design and implementation,
 this breakage period may be skipped
 [upon request](https://sites.google.com/a/chromium.org/dev/blink/launching-features#sites-canvas-main-content:~:text=If%20you%20wish%20to%20skip%20the,Ship%20imply%20approval%20of%20the%20request.).

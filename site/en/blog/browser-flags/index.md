@@ -7,7 +7,7 @@ subhead: |
 authors:
   - thomassteiner
 date: 2021-05-18
-updated: 2021-06-03
+updated: 2021-06-08
 description: |
   For some of the new APIs we introduce in Chromium, you need to set a browser flag for experimentation.
   This article explains how to do this in the various Chromium derivatives like Google Chrome, Microsoft Edge, and others.
@@ -51,8 +51,8 @@ Also be sure to only set flags based on instructions from sources you trust. {% 
 Origin trials are set by website owners and opt a user's browser into supporting a given feature. Only
 features deemed safe for testing with real users are available for origin trials.
 
-Browser flags are set by you and opt in your local browser to a given feature. Not all features that
-are available behind a flag are ripe for production—sometimes quite the opposite. {% endAside %}
+Browser flags are set by you and opt your local browser in to a given feature. Not all features that
+are available behind a flag are ripe for production. Sometimes it's quite the opposite. {% endAside %}
 
 ## Scheme rewrites
 
@@ -64,7 +64,7 @@ mechanism, which makes sense, as Edge is not Chrome, although it is based on Chr
 
 ## Inclusive documentation
 
-We strive for making our documentation inclusive of different browsers, so, for example, telling a
+We strive to make our documentation inclusive of different browsers, so, for example, telling a
 [Brave](https://brave.com/) user to navigate to `chrome://flags` to toggle a given flag—while it
 works thanks to the rewrite mechanism—may not be the most welcoming experience. At the same time,
 listing all possible vendor schemes like `edge://`, `chrome://`, `brave://`, etc. is not a great

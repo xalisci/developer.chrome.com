@@ -7,7 +7,7 @@ authors:
 date: 2020-10-01
 updated: 2021-06-03
 hero: image/8WbTDNrhLsU0El80frMBGE4eMCD3/gPlFs9TIUayaQ1MvxRlP.jpg
-alt: Person wearing medical gloves pouring purple liquid from glass beaker into flask. Bristol Robotics Laboratory, UK.
+alt: A Person wearing medical gloves pouring purple liquid from a glass beaker into a flask. Bristol Robotics Laboratory, UK.
 tags:
   - origin-trials
 ---
@@ -15,13 +15,13 @@ tags:
 [Origin trials](/blog/origin-trials/) are a way to test a new or experimental web platform
 feature.
 
-Origin trials are usually only available on a first-party basis: they only work for a single
+Origin trials are usually only available on a first-party basis; they only work for a single
 registered [origin](https://web.dev/same-site-same-origin/#origin). If a developer wants to test an
 experimental feature on other origins where their content is embedded, those origins all need to be
-registered for the origin trial, each with a unique trial token. This is not a scalable approach for
-testing scripts that are embedded across a number of sites.
+registered for the origin trial as they were originally implemented, each with a unique trial token.
+This was not a scalable approach for testing scripts that are embedded across a number of sites.
 
-Third-party origin trials make it possible for providers of embedded content to try out a new
+Third-party origin trials make it possible for providers of embedded content to try a new
 feature across multiple sites.
 
 {% Img src="image/8WbTDNrhLsU0El80frMBGE4eMCD3/fCachIuiBjh3XPo10CrN.png", alt="Diagram showing how third-party origin trials enable a single registration token to be used across multiple origins", width="800", height="400" %}
@@ -49,7 +49,7 @@ affecting multiple sites. The Origin Trials Developer Guide explains the
 Check [Chrome Platform Status](https://www.chromestatus.com/features/5691464711405568) for updates
 on progress with third-party origin trials.
 
-## How to register for a third-party origin trial
+## Register for a third-party origin trial
 
 1. Select a trial from the [list of active
    trials](https://developers.chrome.com/origintrials/#/trials/active).
@@ -62,7 +62,7 @@ on progress with third-party origin trials.
       even when a valid third-party token is provided. The exclusion percentage varies (or might
       not apply) for each trial, but is typically less than 5%.
 
-1. Click the Register button to submit your request.
+1. Click the "Register" button to submit your request.
 1. Your third-party token will be issued immediately, unless further review of the request is
    required. (Depending on the trial, token requests may require review.)
 1. If review is required, you'll be notified by email when the review is complete and your
