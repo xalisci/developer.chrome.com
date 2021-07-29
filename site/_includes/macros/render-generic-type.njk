@@ -1,0 +1,24 @@
+
+{#
+  Renders a comment, its optional version information and deprecation notice.
+#}
+{% macro renderComment(node) %}
+
+  {% set isDeprecated = false %}
+  {% set deprecatedText = '' %}
+  {% for tag in node.comment.tags %}
+    {% if tag.tag == 'deprecated' %}
+      {% set isDeprecated = true %}
+      {% set deprecatedText = tag.text %}
+    {% endif %}
+  {% endfor %}
+
+  {% if isDeprecated %}
+    <p class="code-sections__deprecated">{{ deprecatedText | mdInline | safe }}</p>
+  {% endif %}
+
+  {% set text = (node.comment.shortText or '') + '\n' + (node.comment.text or '') %}
+  {# This |md filter will add <p> as appropriate. #}
+  {{ text | md | safe }}
+
+{% endmacro %}

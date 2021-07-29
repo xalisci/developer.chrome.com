@@ -24,6 +24,9 @@ class Transform {
     this.project = project;
   }
 
+  /**
+   * @return {Promise<typedoc.JSONOutput.DeclarationReflection[]>}
+   */
   async run() {
     this.walk(this.project);
 
