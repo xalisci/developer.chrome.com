@@ -17,10 +17,9 @@
     {{ content | safe }}
   </div>
 
-  <h2 class="type--h3">Summary</h2>
-
   {% for group in api.groups %}
-    <h2 class="type--h3" id="{{ group.key }}">{{ group.title }}</h2>
+    <div class="api-ref--break"></div>
+    <h2 id="{{ group.key }}">{{ group.title }}</h2>
     <div class="stack flow-space-300">
     {% for node in group.contents %}
       {{ macros.renderTopLevel(node) }}
@@ -38,14 +37,17 @@
   <div class="display-flex gap-top-300 lg:gap-top-400">
     {% include 'partials/navigation-tree.njk' %}
 
-    <article class="stack measure-long center-margin pad-left-400 pad-right-400">
-      <h1 class="type--h2">{{ api.name }}</h1>
+    {# The article is wrapped again so that the ToC aligns on its right on desktop #}
+    <div class="display-flex justify-content-center width-full">
+      <article class="stack measure-long width-full pad-left-400 pad-right-400 api-ref">
+        <h1 class="type--h2">{{ api.name }}</h1>
 
-      {% include 'partials/toc-inner.njk' %}
+        {% include 'partials/toc-inner.njk' %}
 
-      {{ content | safe }}
-    </article>
+        {{ content | safe }}
+      </article>
 
-    {% include 'partials/toc-side.njk' %}
+      {% include 'partials/toc-side.njk' %}
+    </div>
   </div>
 {% endblock %}

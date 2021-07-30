@@ -68,7 +68,7 @@
     "remove-markdown": "^0.3.0",
     "rollup": "^2.22.2",
     "striptags": "^3.1.1",
-    "webdev-infra": "^1.0.23"
+    "webdev-infra": "^1.0.23",
     "typedoc": "^0.21.4",
     "unistore": "^3.5.2"
   },

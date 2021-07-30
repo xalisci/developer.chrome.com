@@ -2,7 +2,15 @@
 
 {%- macro renderTopLevel(node) -%}
 
-  <h3 id="-{{ node.name }}">{{ node.name }}</h3>
+  {% set headingIcon %}{{ iconForNode(node) }}{% endset %}
+
+
+  <h3 id="-{{ node.name }}">
+    <div class="display-flex align-center">
+      <div class="api-ref__icon {{ headingIcon }}"></div>
+      <span>{{ node.name }}</span>
+    </div>
+  </h3>
   {% set commentNode = node %}
   {% if node.kindString == 'Function' %}
     {% set commentNode = node.signatures[0] %}
@@ -10,17 +18,23 @@
   {{ renderComment(commentNode) }}
 
   {% if node.signatures[0] %}
-    <h4>Signature</h4>
-    {{ renderTypeSignature(node.signatures[0]) }}
+    <div>
+      <h4>Signature</h4>
+      {{ renderTypeSignature(node.signatures[0]) }}
+    </div>
 
     {% if node.signatures[0].parameters.length > 0 %}
-      <h4>Parameters</h4>
-      {{ renderParametersList(node.signatures[0].parameters) }}
+      <div>
+        <h4>Parameters</h4>
+        {{ renderParametersList(node.signatures[0].parameters) }}
+      </div>
     {% endif %}
 
   {% elif node.type %}
-    <h4>Type</h4>
-    <code class="typeSignature">{{ renderType(node.type) }}</code>
+    <div>
+      <h4>Type</h4>
+      <code class="typeSignature">{{ renderType(node.type) }}</code>
+    </div>
 
   {% elif node.children.length > 0 %}
     <div class="properties">
@@ -34,35 +48,54 @@
 {%- endmacro -%}
 
 
+{%- macro iconForNode(node) -%}
+
+  {%- if node.signatures[0] -%}
+    api-ref__icon--function
+  {%- endif -%}
+
+{%- endmacro -%}
+
+
 {#
   Renders properties of a specific Signature in a list for display.
 #}
 {% macro renderPropertiesList(properties) %}
   {% for prop in properties %}
     <h5>
-      {% if prop.flags.isStatic %}
-        <span class="staticKeyword">static</span>
-      {% endif %}
+      <code class="plain">
+        {% if prop.flags.isStatic %}
+          <span class="staticKeyword">static</span>
+        {% endif %}
 
-      {% if prop.flags.isReadonly %}
-        <span class="readonlyKeyword">readonly</span>
-      {% endif %}
+        {% if prop.flags.isReadonly %}
+          <span class="readonlyKeyword">readonly</span>
+        {% endif %}
 
-      {% if prop.signatures[0] %}
-        {{ renderTypeSignature(prop.signatures[0]) }}
-      {% elif prop.type %}
-        <span class="propertyName">{{ prop.name }}</span>
-        {%- if prop.flags.isOptional -%} ? {%- endif -%}
-        : {{ renderType(prop.type) }}
-      {% else %}
-        <span class="propertyName">{{ prop.name }}</span>
-      {% endif %}
+        {% if prop.signatures[0] %}
+          {{ renderTypeSignature(prop.signatures[0]) }}
+        {% elif prop.type %}
+          <span class="propertyName">{{ prop.name }}</span>
+          {%- if prop.flags.isOptional -%} ? {%- endif -%}
+          : {{ renderType(prop.type) }}
+        {% else %}
+          <span class="propertyName">{{ prop.name }}</span>
+        {% endif %}
+      </code>
     </h5>
 
-    {{ renderComment(prop) }}
-    {% if prop.signatures[0].parameters.length > 0 %}
-      <h6>Parameters</h6>
-      {{ renderParametersList(prop.signatures[0].parameters) }}
+    {% set deep -%}
+      {{- renderComment(prop) -}}
+      {%- if prop.signatures[0].parameters.length > 0 %}
+        <div>
+          <h4>Parameters</h4>
+          {{ renderParametersList(prop.signatures[0].parameters) }}
+        </div>
+      {%- endif -%}
+    {%- endset %}
+    {% set deep = deep | trim %}
+    {% if deep %}
+      <div class="api-ref__deep stack">{{ deep | safe }}</div>
     {% endif %}
   {% endfor %}
 {% endmacro %}
@@ -79,7 +112,7 @@
         {%- if parameter.flags.isOptional -%} ? {%- endif -%}
       </dt>
       <dd>
-        <code>{{ renderType(parameter.type) }}</code>
+        <code class="plain">{{ renderType(parameter.type) }}</code>
         {{ renderComment(parameter) }}
       </dd>
     {% endfor %}
@@ -132,6 +165,8 @@
 
   {% set returnType = null %}
 
+  <code class="plain">
+
   {%- if node.kindString == 'Constructor signature' -%}
     <span class="newKeyword">new</span>
     <span class="functionName">{{ node.type.name }}</span>
@@ -142,13 +177,15 @@
       {% set returnType = returnType.typeArguments[0] %}
       async
     {% endif %}
-    {{ node.name }}
+    <span class="functionName">{{ node.name }}</span>
   {%- endif -%}
 
   {{- renderFunctionParameters(node.parameters, includeTypes) -}}
   {%- if returnType and returnType.name != 'void' -%}
     : {{ renderType(returnType) -}}
   {%- endif -%}
+
+  </code>
 
 {% endmacro %}
 
