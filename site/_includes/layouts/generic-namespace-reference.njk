@@ -23,15 +23,7 @@
     <h2 class="type--h3" id="{{ group.key }}">{{ group.title }}</h2>
     <div class="stack flow-space-300">
     {% for node in group.contents %}
-      <div class="type stack">
-        <h3 id="{{ group.key }}-{{ node.name }}">{{ node.name }}</h3>
-
-        {% if node.kindString == 'Function' %}
-          {% set node = node.signatures[0] %}
-        {% endif %}
-
-        {{ macros.renderComment(node) }}
-      </div>
+      {{ macros.renderTopLevel(node) }}
     {% endfor %}
     </div>
   {% endfor %}
