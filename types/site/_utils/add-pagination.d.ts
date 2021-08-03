@@ -15,13 +15,12 @@
  */
 
 declare global {
-  export interface PaginatedPage<T = EleventyCollectionItem> {
+  export interface PaginatedPage<T extends {}> extends T {
     date: Date;
-    description?: string;
     href: string;
-    pagination: EleventyPagination<T>;
+    elements: TODO[];
+    pagination: EleventyPagination;
     permalink: string;
-    title?: string;
   }
 }
 

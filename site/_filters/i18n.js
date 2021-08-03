@@ -67,12 +67,12 @@ const data = {i18n: walk(path.join(__dirname, '..', '_data', 'i18n'))};
  * @param {string} locale A locale prefix (example: 'en', 'pl')
  * @return {string}
  */
-const i18n = (pth, locale = 'en') => {
+function i18n(pth, locale = 'en') {
   try {
     return get(data, pth)[locale] || get(data, pth)[defaultLocale];
   } catch (err) {
     throw new Error(`Could not find i18n result for ${pth}`);
   }
-};
+}
 
 module.exports = {i18n};

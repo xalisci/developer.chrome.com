@@ -1,13 +1,8 @@
 {% from 'macros/card-authors.njk' import cardAuthors with context %}
 
-{% macro blogCard(post) %}
-{% set pd = post.data %}
+{% macro frontMatterCard(fm) %}
 <div class="blog-card rounded-lg pad-300 md:pad-400 width-full">
-
-  {% set thumbnail = pd.hero or pd.thumbnail %}
-  {% set alt = pd.alt %}
-
-  {% if thumbnail %}
+  {% if fm.hero %}
     {#
       The thumbnail image defines its own bottom margin because it's optional
       and needs to push the title down. If the title defined its own top
@@ -15,11 +10,11 @@
       between the title and the top of the card.
     #}
     <div class="blog-card__thumbnail gap-bottom-300">
-      <a class="display-block" href="{{ post.url }}" {% if not alt %}aria-hidden="true" tabindex="-1"{% endif %}>
+      <a class="display-block" href="{{ fm.url }}" {% if not fm.subhead %}aria-hidden="true" tabindex="-1"{% endif %}>
         {% Img
           class="rounded-100 object-fit-cover width-full",
-          src=thumbnail,
-          alt=alt,
+          src=fm.hero,
+          alt=fm.title,
           width="278",
           height="156",
           sizes="(min-width: 36em) 330px, calc(100vw - 82px)"
@@ -29,32 +24,33 @@
   {% endif %}
 
   <h2 class="type--h5">
-    <a class="surface display-inline-flex color-text" href="{{ post.url }}">
-      {{ pd.title }}
+    <a class="surface display-inline-flex color-text" href="{{ fm.url }}">
+      {{ fm.title }}
     </a>
   </h2>
 
-{% if not thumbnail %}
-  <p class="type--caption gap-top-200">
-     {{ pd.description }}
-  </p>
-{% endif %}
+  {% if not fm.hero %}
+    <p class="type--caption gap-top-200">
+      {{ fm.description }}
+    </p>
+  {% endif %}
 
-  {% if pd.tags.length %}
+  {% if fm.tags %}
     {% from 'macros/tag.njk' import tag with context %}
     <div class="cluster flow-space-200 gap-top-300">
       <div>
-        {% for item in pd.tags %}
+        {% for item in fm.tags %}
           {{ tag(item) }}
         {% endfor %}
       </div>
     </div>
   {% endif %}
 
-  {# Always render "authors" even with zero authors, as this renders the date #}
-  <div class="gap-top-300">
-    {{ cardAuthors(pd.authors, pd.date) }}
-  </div>
+  {% if fm.authors and fm.authors.length %}
+    <div class="gap-top-300">
+      {{ cardAuthors(fm.authors, fm.date) }}
+    </div>
+  {% endif %}
 
 </div>
 {% endmacro %}
